@@ -8,15 +8,14 @@ import com.adii.matrix.multiplication.matrix.Matrix;
 
 public class ParallelMultiplicationUtil extends MultiplicationUtil {
 
-	// комутативни
-	private static final int THRESHOLD = 500;
+	private static final int THRESHOLD = 100;
 	private static Matrix resultMatrix = null;
 
 	@Override
 	public Matrix multiply(Matrix matrixLeft, Matrix matrixRight) throws InvalidInputException {
 		return multiply(matrixLeft, matrixRight, Runtime.getRuntime().availableProcessors());
 	}
-	
+
 	class MultiplicationAction extends RecursiveAction {
 
 		private static final long serialVersionUID = 1L;
@@ -24,14 +23,12 @@ public class ParallelMultiplicationUtil extends MultiplicationUtil {
 		private Matrix right;
 		private int start;
 		private int end;
-		public double result[][];
 
 		MultiplicationAction(Matrix left, Matrix right, int start, int end) {
 			this.left = left;
 			this.right = right;
 			this.start = start;
 			this.end = end;
-			this.result = new double[left.getRows()][right.getColumns()];
 		}
 
 		@Override
@@ -40,7 +37,7 @@ public class ParallelMultiplicationUtil extends MultiplicationUtil {
 				calculateFromStartToEnd();
 			} else {
 
-				int separator = end / 2;
+				int separator = (start + end) / 2;
 
 				invokeAll(new MultiplicationAction[] { new MultiplicationAction(left, right, start, separator),
 
@@ -51,21 +48,13 @@ public class ParallelMultiplicationUtil extends MultiplicationUtil {
 
 		private void calculateFromStartToEnd() {
 
-			// for (int i = start; i < end; i++) {
-			// for (int j = 0; j < right.getColumns(); j++) {
-			// for (int k = 0; k < left.getColumns(); k++) {
-			// result[i][j] += left.getElement(i, k) * right.getElement(k, j);
-			// }
-			// resultMatrix.setElement(i, j, result[i][j]);
-			// }
-			// }
-
 			for (int i = start; i < end; i++) {
 				for (int j = 0; j < right.getColumns(); j++) {
+					double temp = 0.0;
 					for (int k = 0; k < left.getColumns(); k++) {
-						result[i][j] += left.getElement(i, k) * right.getElement(k, j);
+						temp += left.getElement(i, k) * right.getElement(k, j);
 					}
-					resultMatrix.setElement(i, j, result[i][j]);
+					resultMatrix.setElement(i, j, temp);
 				}
 			}
 		}
@@ -92,8 +81,5 @@ public class ParallelMultiplicationUtil extends MultiplicationUtil {
 		RecursiveAction task = new MultiplicationAction(matrixLeft, matrixRight, 0, matrixLeft.getRows());
 		forkJoinPool.invoke(task);
 	}
-
-
-
 
 }

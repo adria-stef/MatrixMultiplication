@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import com.adii.matrix.multiplication.commons.CommonUtil;
@@ -20,6 +21,7 @@ public abstract class MultiplicationIntegrationTest {
 	private IOUtils ioUtils = new IOUtils();
 	private CommonUtil commonUtil = new CommonUtil();
 
+	private static final Logger LOGGER = Logger.getLogger(MultiplicationIntegrationTest.class.getName());
 	@Test
 	public void test() throws IOException, InvalidInputException {
 		for (int i = 1; i < 3; i++) {
@@ -54,6 +56,7 @@ public abstract class MultiplicationIntegrationTest {
 		message.append("Files ").append(getName(filePath)).append(" and ").append(getName(filePathResult)).append(" are equal: ")
 				.append(contentEquals);
 		System.out.println(INFO + message);
+		LOGGER.info(message);
 		assertTrue(message.toString(), contentEquals);
 	}
 

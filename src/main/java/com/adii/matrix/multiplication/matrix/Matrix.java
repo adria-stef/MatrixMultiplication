@@ -40,31 +40,6 @@ public class Matrix {
 		doubleMatrixArray[i][j] = element;
 	}
 
-	// TODO delete
-	// public Matrix linearMultiplyBy(Matrix matrixRight) {
-	// // TODO fix
-	// LinearMultiplicationUtil linearMultiplicationUtil = new
-	// LinearMultiplicationUtil();
-	// // Matrix matrixResult=null;
-	// // if(this!=null && matrixRight!=null){
-	// Matrix matrixResult = this.linearMultiplyBy(matrixRight);
-	// // } else {
-	// // throw new InvalidInputException();
-	// // }
-	//
-	// // Matrix matrixResult = linearMultiplicationUtil.multiply(this,
-	// // matrixRight);
-	// return matrixResult;
-	// }
-	//
-	// public Matrix parallelMultiplyBy(Matrix matrixRight) {
-	// ParallelMultiplicationUtil parallelMultiplicationUtil = new
-	// ParallelMultiplicationUtil();
-	// Matrix matrixResult = parallelMultiplicationUtil.multiply(this,
-	// matrixRight);
-	// return matrixResult;
-	// }
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -106,8 +81,6 @@ public class Matrix {
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < columns; j++) {
 				stringBuilder.append(doubleMatrixArray[i][j]).append(" ");
-				// TODO delete
-				// stringBuilder.append("["+i+"]["+j+"]=").append(doubleMatrixArray[i][j]).append(" ");
 			}
 			stringBuilder.append("\n");
 		}

@@ -27,7 +27,6 @@ public class IOUtilsTest {
 		multiplicationTestUtilHelper.verifyResult(matrix, ioUtils.readMatrixFromFile(testfileRealPath));
 	}
 
-	// TODO fix name
 	@Test
 	public void testReadWriteRead() throws IOException, InvalidInputException {
 		Matrix readMatrixFromFile = ioUtils.readMatrixFromFile(leftRealPath);
@@ -35,8 +34,4 @@ public class IOUtilsTest {
 		multiplicationTestUtilHelper.verifyResult(ioUtils.readMatrixFromFile(somefileRealPath), readMatrixFromFile);
 	}
 	
-	//TODO test exception
-	
-
-
 }

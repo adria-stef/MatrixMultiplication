@@ -17,7 +17,6 @@ import com.adii.matrix.multiplication.matrix.Matrix;
 public class IOUtils {
 	private static final Logger LOGGER = Logger.getLogger(IOUtils.class.getName());
 
-	// TODO handle exception
 	public Matrix readMatrixFromFile(String filePath) throws IOException, InvalidInputException {
 		InputStream inputStream = null;
 		DataInputStream dataInputStream = null;

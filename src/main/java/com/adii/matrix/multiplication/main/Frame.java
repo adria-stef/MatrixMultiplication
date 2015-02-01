@@ -17,6 +17,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.apache.log4j.Logger;
+
 import com.adii.matrix.multiplication.exceptions.InvalidInputException;
 import com.adii.matrix.multiplication.matrix.Matrix;
 import com.adii.matrix.multiplication.utils.IOUtils;
@@ -40,6 +42,8 @@ public class Frame extends JPanel {
 
 	private static Matrix matrixLeft;
 	private static Matrix matrixRight;
+	
+	private static final Logger LOGGER = Logger.getLogger(Frame.class.getName());
 
 	public Frame() {
 		super(new BorderLayout());
@@ -175,6 +179,7 @@ public class Frame extends JPanel {
 	}
 
 	private static void handleException(String message) {
+		LOGGER.error(message);
 		frame.dispose();
 		JOptionPane.showMessageDialog(frame, message, "Invalid input", JOptionPane.OK_OPTION);
 		frame = createFrame();

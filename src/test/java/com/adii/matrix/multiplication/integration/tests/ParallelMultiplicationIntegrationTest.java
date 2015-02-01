@@ -7,7 +7,8 @@ import com.adii.matrix.multiplication.utils.ParallelMultiplicationUtil;
 public class ParallelMultiplicationIntegrationTest extends MultiplicationIntegrationTest {
 
 	private ParallelMultiplicationUtil parallelMultiplicationUtil = new ParallelMultiplicationUtil();
-	private static final int THREADS = 8;
+	private static int cores = Runtime.getRuntime().availableProcessors();
+	private static final int THREADS = 8 * cores;
 
 	@Override
 	public Matrix getExecutionTime(Matrix matrixLeft, Matrix matrixRight) throws InvalidInputException {
